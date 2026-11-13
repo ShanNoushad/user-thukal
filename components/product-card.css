@@ -1,0 +1,494 @@
+/* =========================================================
+   Thukal product card: paper edition
+   Palette: paper · kraft · natural indigo · olive leaf · turmeric · madder rose
+   ========================================================= */
+
+.tkc-product-card {
+  --tk-paper: #fcfaf4;
+  --tk-paper-deep: #f3eee2;
+  --tk-kraft: #ebdcc6;
+  --tk-sage: #dfe5d2;
+  --tk-sage-soft: #ecf0e2;
+  --tk-ink: #2b2620;
+  --tk-muted: #7d7365;
+  --tk-indigo: #2f3e5c;
+  --tk-indigo-dark: #222e45;
+  --tk-olive: #5f7550;
+  --tk-olive-light: #8ba076;
+  --tk-turmeric: #e0aa43;
+  --tk-madder: #b24b5e;
+  --tk-line: rgba(70, 52, 32, 0.16);
+
+  /* soft paper grain, same family as the page texture */
+  --tk-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .27 0 0 0 0 .18 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 12px;
+  color: var(--tk-ink);
+  background:
+    var(--tk-grain),
+    radial-gradient(circle at 100% 100%, var(--tk-sage-soft) 0 22%, transparent 23%),
+    var(--tk-paper);
+  border: 1.5px solid var(--tk-line);
+  border-radius: 32px;
+  box-shadow:
+    0 2px 0 rgba(70, 52, 32, 0.06),
+    0 22px 32px -22px rgba(70, 52, 32, 0.5);
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.35s ease;
+}
+
+.tkc-product-card:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 2px 0 rgba(70, 52, 32, 0.06),
+    0 30px 40px -22px rgba(70, 52, 32, 0.55);
+}
+
+/* ---------- image area ---------- */
+
+.tkc-product-image {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  isolation: isolate;
+}
+
+.tkc-product-image:focus-visible,
+.tkc-product-name:focus-visible,
+.tkc-view-button:focus-visible,
+.tkc-select-wrap select:focus-visible {
+  outline: 3px solid var(--tk-turmeric);
+  outline-offset: 3px;
+}
+
+/* the sun sitting behind the arch */
+.tkc-sun {
+  position: absolute;
+  top: -10px;
+  right: -8px;
+  z-index: -1;
+  width: 38%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--tk-turmeric);
+  transition: transform 0.5s ease;
+}
+
+.tkc-sun::after {
+  content: "";
+  position: absolute;
+  inset: -9px;
+  border-radius: 50%;
+  border: 2.5px dotted rgba(224, 170, 67, 0.85);
+}
+
+/* arched frame */
+.tkc-image-frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 999px 999px 26px 26px;
+  background:
+    radial-gradient(rgba(70, 52, 32, 0.15) 1.4px, transparent 1.6px) 0 0 / 14px 14px,
+    linear-gradient(180deg, var(--tk-kraft), var(--tk-sage));
+  box-shadow: inset 0 0 0 4px var(--tk-paper);
+}
+
+.tkc-image-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.tkc-product-card:hover .tkc-image-frame img {
+  transform: scale(1.06);
+}
+
+.tkc-image-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 100%;
+  font-size: 0.85rem;
+  color: var(--tk-indigo);
+}
+
+.tkc-hanger {
+  width: 56px;
+  height: 56px;
+  opacity: 0.6;
+}
+
+/* ---------- floating stickers ---------- */
+
+.tkc-deco {
+  position: absolute;
+  pointer-events: none;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.tkc-deco-sparkle-a {
+  top: 14%;
+  left: -6px;
+  width: 26px;
+  color: var(--tk-turmeric);
+}
+
+.tkc-deco-sparkle-b {
+  bottom: 22%;
+  right: -4px;
+  width: 18px;
+  color: var(--tk-madder);
+}
+
+.tkc-deco-leaf-a {
+  bottom: -6px;
+  left: 18px;
+  width: 30px;
+  color: var(--tk-olive);
+  transform: rotate(-20deg);
+}
+
+.tkc-deco-leaf-b {
+  top: 30%;
+  right: -10px;
+  width: 24px;
+  color: var(--tk-olive-light);
+  transform: rotate(60deg);
+}
+
+.tkc-product-card:hover .tkc-deco-sparkle-a {
+  transform: rotate(90deg) scale(1.2);
+}
+.tkc-product-card:hover .tkc-deco-sparkle-b {
+  transform: rotate(-90deg) scale(1.25);
+}
+.tkc-product-card:hover .tkc-deco-leaf-a {
+  transform: rotate(-4deg) translateY(-3px);
+}
+.tkc-product-card:hover .tkc-deco-leaf-b {
+  transform: rotate(40deg) translateX(-3px);
+}
+.tkc-product-card:hover .tkc-sun {
+  transform: scale(1.08);
+}
+
+/* ---------- badges ---------- */
+
+.tkc-discount-badge {
+  position: absolute;
+  top: 10px;
+  left: -6px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--tk-madder);
+  color: var(--tk-paper);
+  line-height: 1;
+  text-align: center;
+  transform: rotate(-12deg);
+  box-shadow:
+    0 0 0 3px var(--tk-paper),
+    0 8px 14px -6px rgba(178, 75, 94, 0.65);
+}
+
+.tkc-discount-badge b {
+  display: block;
+  font-size: 1rem;
+  font-weight: 800;
+  margin-top: 9px;
+}
+
+.tkc-discount-badge small {
+  display: block;
+  margin-bottom: 9px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.tkc-bestseller-badge {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px 6px 10px;
+  border-radius: 999px;
+  background: var(--tk-paper);
+  color: var(--tk-indigo);
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  box-shadow: 0 8px 16px -8px rgba(70, 52, 32, 0.55);
+}
+
+.tkc-badge-star {
+  width: 14px;
+  height: 14px;
+  color: var(--tk-turmeric);
+}
+
+/* ---------- content ---------- */
+
+.tkc-product-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 8px;
+  padding: 18px 8px 6px;
+}
+
+.tkc-product-category {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 6px;
+  padding: 4px 12px 4px 8px;
+  border-radius: 999px;
+  background: var(--tk-sage-soft);
+  border: 1px solid rgba(95, 117, 80, 0.25);
+  color: var(--tk-olive);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.tkc-category-leaf {
+  width: 13px;
+  height: 13px;
+  color: var(--tk-olive-light);
+}
+
+.tkc-product-name {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: left;
+  color: var(--tk-ink);
+  cursor: pointer;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.tkc-product-name:hover {
+  color: var(--tk-indigo);
+}
+
+.tkc-squiggle {
+  width: 64px;
+  height: 9px;
+  color: var(--tk-turmeric);
+}
+
+.tkc-product-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+}
+
+.tkc-product-price strong {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--tk-indigo);
+  letter-spacing: -0.01em;
+}
+
+.tkc-product-price del {
+  color: var(--tk-muted);
+  font-size: 0.95rem;
+}
+
+.tkc-product-price span {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--tk-kraft);
+  color: #5b4320;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+/* ---------- variant select ---------- */
+
+.tkc-card-variant {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.tkc-card-variant label {
+  padding-left: 6px;
+  color: var(--tk-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.tkc-select-wrap {
+  position: relative;
+}
+
+.tkc-select-wrap::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  width: 8px;
+  height: 8px;
+  border-right: 2.5px solid var(--tk-indigo);
+  border-bottom: 2.5px solid var(--tk-indigo);
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
+}
+
+.tkc-select-wrap select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  padding: 11px 42px 11px 18px;
+  border: 1.5px solid var(--tk-line);
+  border-radius: 999px;
+  background: var(--tk-paper-deep);
+  color: var(--tk-ink);
+  font: inherit;
+  font-size: 0.88rem;
+  cursor: pointer;
+  text-overflow: ellipsis;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.tkc-select-wrap select:hover {
+  border-color: var(--tk-indigo);
+  background: var(--tk-paper);
+}
+
+/* ---------- actions ---------- */
+
+.tkc-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.tkc-view-button {
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 6px 6px 22px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--tk-indigo);
+  color: var(--tk-paper);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  box-shadow: 0 10px 18px -10px rgba(34, 46, 69, 0.8);
+}
+
+.tkc-arrow {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--tk-turmeric);
+  color: var(--tk-indigo-dark);
+  font-size: 1.1rem;
+  transition: transform 0.25s ease;
+}
+
+.tkc-view-button:hover {
+  background: var(--tk-indigo-dark);
+}
+
+.tkc-view-button:hover .tkc-arrow {
+  transform: translateX(4px) rotate(-45deg);
+}
+
+.tkc-stock-label {
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #f1dcdc;
+  color: #8e3345;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* ---------- sold out state ---------- */
+
+.tkc-product-card.is-unavailable .tkc-image-frame img {
+  filter: grayscale(0.7) brightness(1.05);
+  opacity: 0.75;
+}
+
+.tkc-product-card.is-unavailable .tkc-sun {
+  background: #e3ddcf;
+}
+
+/* ---------- small screens / motion ---------- */
+
+@media (max-width: 420px) {
+  .tkc-product-card {
+    border-radius: 28px;
+    padding: 10px;
+  }
+
+  .tkc-product-name {
+    font-size: 1.1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tkc-product-card,
+  .tkc-product-card *,
+  .tkc-product-card *::before,
+  .tkc-product-card *::after {
+    transition: none !important;
+  }
+
+  .tkc-product-card:hover {
+    transform: none;
+  }
+}

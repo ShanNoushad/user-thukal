@@ -1,0 +1,32 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function owns(uid) { return signedIn() && request.auth.uid == uid; }
+
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /users/{uid} {
+      allow read, create, update: if owns(uid);
+      allow delete: if false;
+      match /notifications/{notificationId} {
+        allow read: if owns(uid);
+        allow update: if owns(uid)
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['read']);
+        allow create, delete: if false;
+      }
+    }
+
+    match /bookings/{bookingId} {
+      allow create: if signedIn()
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.status == 'Pending'
+        && request.resource.data.keys().hasAll(['userId','productId','productName','quantity','deliveryAddress','status','createdAt']);
+      allow read: if signedIn() && resource.data.userId == request.auth.uid;
+      allow update, delete: if false;
+    }
+  }
+}

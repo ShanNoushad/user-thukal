@@ -1,0 +1,1 @@
+Place your replaceable hero campaign image here as hero.jpg. Product image URLs are loaded from Firestore.\n
