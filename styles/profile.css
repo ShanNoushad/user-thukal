@@ -1,0 +1,365 @@
+/* Profile page. Palette matches the existing theme. */
+.pf {
+  --pf-bg: #f4f1ea;
+  --pf-fg: #2a2823;
+  --pf-muted: #6f685d;
+  --pf-accent: #8c7258;
+  --pf-soft: #ede6dc;
+  --pf-card: #faf8f3;
+  --pf-line: rgba(42, 40, 35, 0.14);
+  --pf-serif: Georgia, "Times New Roman", serif;
+}
+
+.pf-wrap {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 4vw, 32px) 72px;
+}
+
+/* ── Header ── */
+.pf-hero {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 32px 0 28px;
+}
+.pf-avatar-wrap { position: relative; flex: none; }
+.pf-avatar {
+  display: grid;
+  place-items: center;
+  width: 112px;
+  height: 112px;
+  overflow: hidden;
+  background: var(--pf-soft);
+  border: 1px solid var(--pf-line);
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px var(--pf-bg), 0 0 0 6px var(--pf-accent);
+}
+.pf-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pf-avatar span {
+  font-family: var(--pf-serif);
+  font-style: italic;
+  font-size: 2.8rem;
+  color: var(--pf-accent);
+}
+.pf-avatar.is-loading { opacity: 0.55; animation: pf-pulse 1.1s ease-in-out infinite; }
+@keyframes pf-pulse { 50% { opacity: 0.9; } }
+
+.pf-camera {
+  position: absolute;
+  right: -2px;
+  bottom: 2px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  color: var(--pf-bg);
+  background: var(--pf-fg);
+  border: 2px solid var(--pf-bg);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+.pf-camera:hover { background: var(--pf-accent); transform: scale(1.06); }
+.pf-camera input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+.pf-camera:focus-within { outline: 2px solid var(--pf-accent); outline-offset: 3px; }
+.pf-sr {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+.pf-id { flex: 1; min-width: 0; }
+.pf-id .eyebrow { margin: 0 0 6px; }
+.pf-id h1 {
+  margin: 0;
+  font-family: var(--pf-serif);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  line-height: 1.05;
+  color: var(--pf-fg);
+  overflow-wrap: anywhere;
+}
+.pf-id h1 em { color: var(--pf-accent); }
+.pf-email { margin: 8px 0 0; font-size: 0.92rem; color: var(--pf-muted); overflow-wrap: anywhere; }
+
+.pf-logout {
+  flex: none;
+  padding: 11px 22px;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pf-fg);
+  background: transparent;
+  border: 1px solid var(--pf-line);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+.pf-logout:hover { color: var(--pf-bg); background: var(--pf-fg); border-color: var(--pf-fg); }
+
+/* ── Shortcuts ── */
+.pf-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-block: 1px solid var(--pf-line);
+  margin-bottom: 28px;
+}
+.pf-shortcuts a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 22px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--pf-fg);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.pf-shortcuts a + a { border-left: 1px solid var(--pf-line); }
+.pf-shortcuts a i { font-style: normal; color: var(--pf-accent); transition: transform 0.25s ease; }
+.pf-shortcuts a:hover { background: var(--pf-soft); }
+.pf-shortcuts a:hover i { transform: translateX(4px); }
+
+/* ── Alerts ── */
+.pf-alert {
+  margin: 0 0 22px;
+  padding: 14px 18px;
+  font-size: 0.9rem;
+  border-left: 3px solid;
+}
+.pf-alert-success { color: #3f5a3a; background: #eaf0e4; border-color: #6f8f66; }
+.pf-alert-error { color: #8a3a2f; background: #f6e5e1; border-color: #b4564a; }
+
+/* ── Cards ── */
+.pf-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 24px;
+  align-items: start;
+}
+.pf-card {
+  padding: clamp(22px, 3vw, 34px);
+  background: var(--pf-card);
+  border: 1px solid var(--pf-line);
+}
+.pf-card-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--pf-line);
+}
+.pf-card-head .eyebrow { margin: 0 0 4px; }
+.pf-card-head h2 {
+  margin: 0;
+  font-family: var(--pf-serif);
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: var(--pf-fg);
+}
+.pf-link-btn {
+  padding: 4px 0;
+  font: inherit;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pf-accent);
+  background: none;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.pf-link-btn:hover { color: var(--pf-fg); }
+
+/* ── Form fields (also styles the AddressForm inside cards) ── */
+.pf-form { display: grid; gap: 20px; }
+.pf-card label { display: grid; gap: 8px; }
+.pf-card label > span,
+.pf-card label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pf-muted);
+}
+.pf-card input,
+.pf-card select,
+.pf-card textarea {
+  width: 100%;
+  padding: 13px 14px;
+  font: inherit;
+  font-size: 0.95rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--pf-fg);
+  background: var(--pf-bg);
+  border: 1px solid var(--pf-line);
+  border-radius: 0;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.pf-card input:focus,
+.pf-card select:focus,
+.pf-card textarea:focus {
+  outline: none;
+  border-color: var(--pf-accent);
+  box-shadow: 0 0 0 3px rgba(140, 114, 88, 0.16);
+}
+.pf-card input:disabled { color: var(--pf-muted); background: var(--pf-soft); cursor: not-allowed; }
+
+.pf-save { justify-self: start; margin-top: 4px; cursor: pointer; }
+.pf-save:disabled { opacity: 0.6; cursor: wait; }
+
+/* ── Address ── */
+.pf-address {
+  display: flex;
+  gap: 14px;
+  padding: 20px;
+  color: var(--pf-accent);
+  background: var(--pf-soft);
+}
+.pf-address svg { flex: none; margin-top: 2px; }
+.pf-address strong {
+  display: block;
+  margin-bottom: 6px;
+  font-family: var(--pf-serif);
+  font-weight: 400;
+  font-size: 1.15rem;
+  color: var(--pf-fg);
+}
+.pf-address p { margin: 2px 0; font-size: 0.92rem; line-height: 1.5; color: var(--pf-muted); }
+.pf-address .pf-address-phone { margin-top: 8px; color: var(--pf-fg); font-weight: 500; }
+
+.pf-empty {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  padding: 32px 16px;
+  text-align: center;
+  border: 1px dashed var(--pf-line);
+}
+.pf-empty span { font-size: 1.8rem; color: var(--pf-accent); }
+.pf-empty p { margin: 0; font-size: 0.92rem; color: var(--pf-muted); }
+
+.pf-address-form {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--pf-line);
+}
+
+/* ── Mobile ── */
+@media (max-width: 860px) {
+  .pf-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .pf-hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 18px;
+    padding-top: 20px;
+  }
+  .pf-logout { width: 100%; }
+  .pf-shortcuts { grid-template-columns: 1fr; }
+  .pf-shortcuts a + a { border-left: 0; border-top: 1px solid var(--pf-line); }
+  .pf-save { justify-self: stretch; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-avatar.is-loading { animation: none; }
+  .pf-camera, .pf-logout, .pf-shortcuts a, .pf-shortcuts a i { transition: none; }
+}
+
+
+
+/* ── Soft Curved Box Design ── */
+
+/* Main profile cards */
+.pf-card {
+  border-radius: 22px;
+  box-shadow: 0 8px 28px rgba(42, 40, 35, 0.045);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.pf-card:hover {
+  box-shadow: 0 12px 34px rgba(42, 40, 35, 0.08);
+}
+
+/* Shortcuts */
+.pf-shortcuts {
+  border: 1px solid var(--pf-line);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--pf-card);
+}
+
+.pf-shortcuts a {
+  border-radius: 0;
+}
+
+/* Form inputs */
+.pf-card input,
+.pf-card select,
+.pf-card textarea {
+  border-radius: 10px;
+}
+
+/* Save button */
+.pf-save {
+  border-radius: 30px;
+  padding: 13px 28px;
+}
+
+/* Logout button */
+.pf-logout {
+  border-radius: 30px;
+}
+
+/* Address box */
+.pf-address {
+  border-radius: 16px;
+}
+
+/* Empty address box */
+.pf-empty {
+  border-radius: 16px;
+}
+
+/* Alert messages */
+.pf-alert {
+  border-radius: 10px;
+  border-left-width: 3px;
+}
+
+/* Address form */
+.pf-address-form {
+  border-radius: 14px;
+}
+
+/* Camera button */
+.pf-camera {
+  border-radius: 50%;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .pf-card {
+    border-radius: 18px;
+  }
+
+  .pf-shortcuts {
+    border-radius: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-card {
+    transition: none;
+  }
+}
