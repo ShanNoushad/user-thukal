@@ -1,0 +1,267 @@
+/* Map these to your site's palette */
+.navbar {
+  --nb-bg: #f4f1ea;
+  --nb-fg: #2a2823;
+  --nb-muted: #6f685d;
+  --nb-accent: #8c7258;
+  --nb-line: rgba(42, 40, 35, 0.14);
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 18px clamp(20px, 5vw, 56px);
+  color: var(--nb-fg);
+  background: color-mix(in srgb, var(--nb-bg) 70%, transparent);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid transparent;
+  transition: padding 0.3s ease, border-color 0.3s ease, background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.navbar.is-scrolled {
+  padding-block: 12px;
+  border-bottom-color: var(--nb-line);
+  background: color-mix(in srgb, var(--nb-bg) 88%, transparent);
+  box-shadow: 0 10px 30px -22px rgba(42, 40, 35, 0.35);
+}
+
+/* Brand */
+.navbar .brand {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: 0.34em;
+  text-decoration: none;
+  color: var(--nb-fg);
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+.navbar .brand:hover { opacity: 0.8; }
+.navbar .brand span {
+  font-size: 0.55em;
+  vertical-align: super;
+  margin-left: 2px;
+  letter-spacing: 0;
+  color: var(--nb-accent);
+}
+
+/* Links */
+.navbar .nav-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 3vw, 38px);
+  margin-inline: auto;
+}
+
+.navbar .nav-link {
+  position: relative;
+  padding: 6px 0;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--nb-muted);
+  transition: color 0.25s ease;
+}
+.navbar .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--nb-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.navbar .nav-link:hover,
+.navbar .nav-link.active { color: var(--nb-fg); }
+.navbar .nav-link:hover::after,
+.navbar .nav-link.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Auth */
+.navbar .nav-auth {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.navbar .login-link {
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--nb-muted);
+  transition: color 0.25s ease;
+}
+.navbar .login-link:hover { color: var(--nb-fg); }
+
+.navbar .join-link {
+  padding: 11px 24px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--nb-bg);
+  background: var(--nb-fg);
+  border: 1px solid var(--nb-fg);
+  border-radius: 0;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease,
+    border-color 0.25s ease;
+}
+.navbar .join-link:hover {
+  background: transparent;
+  color: var(--nb-fg);
+  transform: translateY(-1px);
+}
+
+.navbar .account-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px 6px 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--nb-fg);
+  border: 1px solid var(--nb-line);
+  border-radius: 999px;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+.navbar .account-link:hover {
+  border-color: var(--nb-accent);
+  background: color-mix(in srgb, var(--nb-accent) 8%, transparent);
+}
+.navbar .avatar {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--nb-bg);
+  background: var(--nb-accent);
+  border-radius: 50%;
+}
+
+/* Focus */
+.navbar a:focus-visible,
+.navbar .menu-toggle:focus-visible {
+  outline: 2px solid var(--nb-accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Mobile toggle */
+.navbar .menu-toggle {
+  display: none;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: none;
+  border: 1px solid var(--nb-line);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.navbar .menu-toggle span {
+  position: absolute;
+  left: 11px;
+  width: 16px;
+  height: 1.5px;
+  background: var(--nb-fg);
+  transition: transform 0.3s ease, top 0.3s ease;
+}
+.navbar .menu-toggle span:first-child { top: 15px; }
+.navbar .menu-toggle span:last-child { top: 22px; }
+.navbar.is-open .menu-toggle span:first-child { top: 18px; transform: rotate(45deg); }
+.navbar.is-open .menu-toggle span:last-child { top: 18px; transform: rotate(-45deg); }
+
+@media (max-width: 820px) {
+  .navbar { flex-wrap: wrap; gap: 0; }
+  .navbar .brand { margin-right: auto; }
+  .navbar .menu-toggle { display: block; order: 2; }
+  .navbar .nav-auth { order: 1; margin-right: 12px; }
+  .navbar .account-link { font-size: 0; gap: 0; padding: 4px; }
+
+  .navbar .nav-links {
+    order: 3;
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+  }
+  .navbar.is-open .nav-links {
+    max-height: 320px;
+    padding-top: 16px;
+  }
+  .navbar .nav-link {
+    width: 100%;
+    padding: 14px 0;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--nb-line);
+  }
+  .navbar .nav-link::after { display: none; }
+  .navbar .nav-link.active { color: var(--nb-accent); }
+}
+
+/* Logo */
+.navbar .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.navbar .brand img {
+  display: block;
+  height: 44px;
+  width: auto;
+  /* lets a cream logo background blend into the navbar */
+  mix-blend-mode: multiply;
+  transition: height 0.3s ease;
+}
+.navbar.is-scrolled .brand img { height: 38px; }
+
+.navbar .brand-text {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.3em;
+  line-height: 1;
+  color: var(--nb-fg);
+}
+.navbar .brand-reg {
+  margin-left: 2px;
+  font-size: 0.5em;
+  vertical-align: super;
+  letter-spacing: 0;
+  color: var(--nb-accent);
+}
+
+@media (max-width: 820px) {
+  .navbar .brand { gap: 10px; }
+  .navbar .brand img,
+  .navbar.is-scrolled .brand img { height: 36px; }
+  .navbar .brand-text { font-size: 1.05rem; letter-spacing: 0.24em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar, .navbar * { transition: none !important; }
+}

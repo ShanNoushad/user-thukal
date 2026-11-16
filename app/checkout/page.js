@@ -1,4 +1,3 @@
-
 "use client";
 
 import { Suspense, useEffect, useMemo, useState } from "react";
@@ -396,6 +395,28 @@ function CheckoutContent() {
         collection(db, "bookings"),
         bookingData
       );
+
+      // Send the confirmation email without blocking the redirect.
+      // If the email fails, the booking is still saved.
+      if (user.email) {
+        fetch("/api/bookings/confirmation-email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          keepalive: true,
+          body: JSON.stringify({
+            email: user.email,
+            name: cleanAddress.fullName,
+            bookingId: bookingRef.id,
+            productName: bookingData.productName,
+            variantLabel: bookingData.variantLabel,
+            quantity: bookingData.quantity,
+            unitPrice: bookingData.unitPrice,
+            subtotal: bookingData.subtotal,
+            address: cleanAddress,
+            paymentMethod: bookingData.paymentMethod,
+          }),
+        }).catch((e) => console.error("Confirmation email failed:", e));
+      }
 
       router.replace(`/booking-success?id=${bookingRef.id}`);
     } catch (err) {
