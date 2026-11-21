@@ -1,0 +1,108 @@
+.booking-clickable { cursor: pointer; transition: transform .2s ease, box-shadow .2s ease; }
+.booking-clickable:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,.12); }
+
+.bd-backdrop {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,.55);
+  display: flex; align-items: flex-end; justify-content: center;
+  animation: bd-fade .2s ease;
+}
+.bd-sheet {
+  position: relative;
+  width: 100%; max-width: 560px; max-height: 88vh; overflow-y: auto;
+  background: #fff; color: #111;
+  border-radius: 36px 36px 0 0;           /* the curved top */
+  padding: 14px 22px 28px;
+  box-shadow: 0 -12px 40px rgba(0,0,0,.25);
+  animation: bd-up .3s cubic-bezier(.2,.8,.2,1);
+}
+@media (min-width: 700px) {
+  .bd-backdrop { align-items: center; }
+  .bd-sheet { border-radius: 36px; max-height: 85vh; }
+}
+.bd-handle { width: 48px; height: 5px; border-radius: 99px; background: #d6d6d6; margin: 0 auto 14px; }
+.bd-close {
+  position: absolute; top: 18px; right: 18px;
+  width: 36px; height: 36px; border: 0; border-radius: 50%;
+  background: #f0f0f0; cursor: pointer; font-size: 14px;
+}
+.bd-top { display: flex; gap: 16px; align-items: center; margin-bottom: 18px; padding-right: 40px; }
+.bd-top h2 { margin: 6px 0 4px; font-size: 1.3rem; }
+.bd-top small { color: #777; word-break: break-all; }
+.bd-img {
+  width: 92px; height: 92px; flex-shrink: 0; border-radius: 24px; overflow: hidden;
+  background: #f3f3f3; display: grid; place-items: center; font-size: .7rem; letter-spacing: .12em;
+}
+.bd-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.bd-card { background: #f7f7f7; border-radius: 24px; padding: 16px 18px; margin-top: 12px; }
+.bd-card h4 { margin: 0 0 12px; font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: #777; }
+.bd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; }
+.bd-item span, .bd-address span { display: block; font-size: .72rem; color: #888; margin-bottom: 2px; }
+.bd-item strong { font-size: .95rem; font-weight: 600; word-break: break-word; }
+.bd-address { margin-top: 14px; padding-top: 14px; border-top: 1px dashed #d8d8d8; }
+.bd-address p { margin: 2px 0; font-size: .92rem; }
+
+@keyframes bd-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes bd-up { from { transform: translateY(60px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+
+/* ---------- Curved booking list ---------- */
+.booking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 0;
+}
+
+.booking-list .booking-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 22px 14px 14px;
+  background: #fbf9f4;                       /* slightly lighter than the page */
+  border: 1px solid rgba(60, 50, 30, .10);   /* replaces the straight divider lines */
+  border-radius: 28px;                       /* the curve */
+  box-shadow: 0 4px 14px rgba(60, 50, 30, .06);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.booking-list .booking-row:hover {
+  transform: translateY(-3px);
+  border-color: rgba(60, 50, 30, .22);
+  box-shadow: 0 14px 30px rgba(60, 50, 30, .14);
+}
+
+.booking-list .booking-thumb {
+  width: 92px;
+  height: 92px;
+  flex-shrink: 0;
+  border-radius: 22px;                       /* curved image */
+  overflow: hidden;
+}
+.booking-list .booking-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.booking-list .booking-info { flex: 1; min-width: 0; }
+.booking-list .booking-info small { word-break: break-all; }
+
+.booking-list .status-pill {
+  border-radius: 999px;                      /* full pill */
+  padding: 7px 16px;
+  white-space: nowrap;
+}
+
+/* Phones: keep the card compact */
+@media (max-width: 600px) {
+  .booking-list .booking-row { gap: 14px; padding: 12px; border-radius: 22px; }
+  .booking-list .booking-thumb { width: 76px; height: 76px; border-radius: 18px; }
+}
+
+/* ---------- Match the detail sheet to the same theme ---------- */
+.bd-sheet { background: #f6f3ec; }
+.bd-card { background: #fbf9f4; border: 1px solid rgba(60, 50, 30, .08); }
+.bd-top h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
+.bd-img { border-radius: 22px; }
